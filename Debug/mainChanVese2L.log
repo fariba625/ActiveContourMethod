@@ -1,0 +1,144 @@
+﻿Build started 18/03/2013 11:54:08 AM.
+     1>Project "C:\Users\shervin\Desktop\University\Ad.Image\ChanVese2L\ChanVese2L\mainChanVese2L.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching ".\Debug\mainChanVese2L.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DMatrix.cpp Image.cpp
+         Image.cpp
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(97): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(167): error C2065: 'ifstream' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(167): error C2146: syntax error : missing ';' before identifier 'infile'
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(167): error C2065: 'infile' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(170): error C2065: 'infile' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(170): error C2228: left of '.open' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(170): error C2653: 'ios' : is not a class or namespace name
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(170): error C2065: 'in' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(172): error C2065: 'infile' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(174): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(174): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(182): error C2065: 'infile' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(216): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(246): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(270): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(291): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(317): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(346): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(371): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(371): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(438): error C2065: 'ofstream' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(438): error C2146: syntax error : missing ';' before identifier 'ofp'
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(438): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(442): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(442): error C2228: left of '.open' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(442): error C2653: 'ios' : is not a class or namespace name
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(442): error C2065: 'out' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(444): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(445): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(445): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(448): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(448): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(449): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(449): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(450): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(450): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(459): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(459): error C2228: left of '.write' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(461): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(461): error C2228: left of '.close' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(524): error C2668: 'floor' : ambiguous call to overloaded function
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(567): could be 'long double floor(long double)'
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(519): or       'float floor(float)'
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(136): or       'double floor(double)'
+                 while trying to match the argument list '(int)'
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(525): error C2668: 'floor' : ambiguous call to overloaded function
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(567): could be 'long double floor(long double)'
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(519): or       'float floor(float)'
+                 c:\program files\microsoft visual studio 10.0\vc\include\math.h(136): or       'double floor(double)'
+                 while trying to match the argument list '(int)'
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(621): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(622): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(631): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(631): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(631): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(633): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(634): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(636): error C2065: 'cerr' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(637): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(641): error C2065: 'i' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(809): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(809): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(809): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(812): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(812): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(814): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(814): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(819): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(819): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(819): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(822): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(824): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(829): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(831): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(872): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(872): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(872): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(875): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(875): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(877): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(877): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(883): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(883): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(883): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(885): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(900): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(900): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(900): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(902): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(952): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(952): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(952): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(955): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(955): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(957): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(957): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(963): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(963): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(963): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(965): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(980): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(980): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(980): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(982): error C2065: 'm' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1109): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1109): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1110): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1110): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1227): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\image.cpp(1227): fatal error C1003: error count exceeds 100; stopping compilation
+         DMatrix.cpp
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(112): error C2065: 'ofstream' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(112): error C2146: syntax error : missing ';' before identifier 'ofp'
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(112): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(115): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(115): error C2228: left of '.open' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(115): error C2653: 'ios' : is not a class or namespace name
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(115): error C2065: 'out' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(117): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(118): error C2065: 'cout' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(118): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(125): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(125): error C2065: 'endl' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(129): error C2065: 'ofp' : undeclared identifier
+     1>c:\users\shervin\desktop\university\ad.image\chanvese2l\chanvese2l\dmatrix.cpp(129): error C2228: left of '.close' must have class/struct/union
+                 type is ''unknown-type''
+         Generating Code...
+     1>Done Building Project "C:\Users\shervin\Desktop\University\Ad.Image\ChanVese2L\ChanVese2L\mainChanVese2L.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.24
