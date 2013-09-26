@@ -1,12 +1,4 @@
-/*******************************************************************
- * File:    Image.cpp
- * version: 1.0
- * project: Project
- * author:  Song Gao
- * date:    Feb. 11, 2004
- * description: Function implementations in class Image
- * 	           
- ******************************************************************/ 
+
 
 
 #include "Image.h"
@@ -54,7 +46,7 @@ Image::Image(Image &m)
 	int i, j;
 
 	createImage(m.getRow(), m.getCol());      // allocate memory
-  
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
 		pixel[i * col + j] = m(i, j);
@@ -65,7 +57,7 @@ void Image::createImage()
 	int i;
 
 	pixel = (double *) new double [(row+1) * (col+1)];
-	if (!pixel) 
+	if (!pixel)
 	outofMemory();
 
 	for (i=0; i<(row+1)*(col+1); i++)
@@ -81,8 +73,8 @@ void Image::createImage(int nr, int nc)
 	col = nc;
 
 	pixel = (double *) new double [(row+1) * (col+1)];
-  
-	if (!pixel) 
+
+	if (!pixel)
 		outofMemory();
 
 	for (i=0; i<(row+1)*(col+1); i++)
@@ -103,7 +95,7 @@ Image::~Image()
 {
 	if (pixel)
     delete [] pixel;       // free the pixel buffer
-  
+
 	deAllocateMem ( );
 
 }
@@ -150,7 +142,7 @@ int Image::getMaximum() const
 int Image::getMinimum() const
 {
 	double tmin = 255.0;
-	int i, j; 
+	int i, j;
 
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
@@ -168,8 +160,8 @@ void Image::readImage(char *fname)
 	int i, j;
 
 	infile.open(fname, ios::in);
-	
-	if (!infile) 
+
+	if (!infile)
 	{
 		cerr << "Can't read data file: " << fname << endl;
 		exit(1);
@@ -194,7 +186,7 @@ Image Image::operator=(Image m)
 	int i, j;
 
 	createImage(m.getRow(), m.getCol());             // allocate memory
-  
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
 		pixel[i * col + j] = m(i, j);
@@ -211,14 +203,14 @@ Image Image::operator+(Image m)
 	nr = m.getRow();
 	nc = m.getCol();
 
-	if (nr != row || nc != col) 
+	if (nr != row || nc != col)
 	{
 		cerr << "Matrices are not of the same size, cannot do addition\n";
 		exit(3);
 	}
 
-//	temp.createImage(row, col);             
-  
+//	temp.createImage(row, col);
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
 	{
@@ -241,14 +233,14 @@ Image Image::operator-(Image m)
 	nr = m.getRow();
 	nc = m.getCol();
 
-	if (nr != row || nc != col) 
+	if (nr != row || nc != col)
 	{
 		cerr << "Matrices are not of the same size, cannot do subtraction\n";
 		exit(3);
 	}
 
-	temp.createImage(row, col);             
-  
+	temp.createImage(row, col);
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
 		temp(i, j) = pixel[i*col+j] - m(i, j);
@@ -265,14 +257,14 @@ Image Image::operator*(Image m)
 	nr = m.getRow();
 	nc = m.getCol();
 
-	if (nr != row || nc != col) 
+	if (nr != row || nc != col)
 	{
 		cerr << "Matrices are not of the same size, cannot do multiplication\n";
 		exit(3);
 	}
 
-	temp.createImage(row, col);             
-  
+	temp.createImage(row, col);
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
 		temp(i, j) = pixel[i*col+j] * m(i, j);
@@ -286,14 +278,14 @@ Image Image::operator/(double &factor)
 	int i, j;
 	Image temp;
 
-	if (factor == 0.0) 
+	if (factor == 0.0)
 	{
 		cout << "Image diveded by 0, can't do division\n";
 		exit(1);
 	}
 
-	temp.createImage(row, col);             
-  
+	temp.createImage(row, col);
+
 	for (i=0; i<row; i++)
     for (j=0; j<col; j++)
         temp(i, j) = pixel[(i*col+j)]/factor;
@@ -312,19 +304,19 @@ Image Image::operator->*(Image m)
 	nr = m.getRow();
 	nc = m.getCol();
 
-	if (col != nr) 
+	if (col != nr)
 	{
 		cerr << "Image size is not consistent, cannot do multiplication\n";
 		exit(3);
 	}
 
-	temp.createImage(row, nc);             
-  
+	temp.createImage(row, nc);
+
 	for (i=0; i<row; i++)
-    for (j=0; j<nc; j++) 
+    for (j=0; j<nc; j++)
 	{
       tmp = 0.0;
-      for (p=0; p<col; p++) 
+      for (p=0; p<col; p++)
 	  {
 		tmp += pixel[i*col+p] * m(p, j);
 		temp(i, j) = tmp;
@@ -341,7 +333,7 @@ Image Image::subImage(int startrow, int startcol, int endrow, int endcol)
 	int i, j;
 	Image temp;
 
-	if (startrow > endrow || startcol > endcol || endrow > row -1 || endcol > col - 1) 
+	if (startrow > endrow || startcol > endcol || endrow > row -1 || endcol > col - 1)
 	{
 		cerr << "Check size\n";
 		exit(1);
@@ -370,7 +362,7 @@ void Image::readPGMRAW(char *fname)
 	if ((pgm = fopen(fname, "rb")) == NULL)
 		cout << "\n		Image " << fname << " can not be opened correctly!" << endl;
 
-	//  Scan pnm type information, expecting P5 
+	//  Scan pnm type information, expecting P5
 	fgets(line, 511, pgm);
 	if (line[0]=='#') fgets(line, 511, pgm);
 	sscanf(line, "P%d", &type);
@@ -378,12 +370,12 @@ void Image::readPGMRAW(char *fname)
 		fclose(pgm);
 	}
 
-	//Get dimensions of pgm 
+	//Get dimensions of pgm
 	fgets(line, 511, pgm);
 	if (line[0]=='#') fgets(line, 511, pgm);
 	sscanf(line, "%d %d", &nc, &nr);
 
-	// Get maxval 
+	// Get maxval
 	fgets(line, 511, pgm);
 	if (line[0]=='#') fgets(line, 511, pgm);
 	sscanf(line, "%d", &maxval);
@@ -441,7 +433,7 @@ void Image::writePGMRAW(char *fname)
 
 	ofp.open(fname, ios::out);
 
-	if (!ofp) 
+	if (!ofp)
 		cerr << "Can't write image: " << fname << endl;
 
   // Write the format ID
@@ -492,15 +484,15 @@ Image Image::threshold(double thresh, int nt)
 	temp.setCol(col);
 	temp.createImage();
 
-	if (nt != GRAY && nt != BINARY) 
+	if (nt != GRAY && nt != BINARY)
 		nt = BINARY;
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		if (pixel[i*col+j] >= thresh)
 		   temp(i, j) = (nt == GRAY) ? pixel[i*col+j] : 255;
-		else 
+		else
 		temp(i, j) = 0;//pixel[i*col+j];//0;
 	}
 
@@ -508,7 +500,7 @@ Image Image::threshold(double thresh, int nt)
 }
 
 
-// linear normalization 
+// linear normalization
 Image Image::Normalization(int MM, int NN)
 {
 	int i=0, j=0, m=0, n=0;
@@ -523,10 +515,10 @@ Image Image::Normalization(int MM, int NN)
 			if(pixel[i*col+j]>0) {
 				m = (int)floor(i*MM/row);
 				n = (int)floor(j*NN/col);
-				temp(m,n)= pixel[i*col+j]; 
+				temp(m,n)= pixel[i*col+j];
 			}
 		  }
-		
+
 			return temp;
 
 }
@@ -534,7 +526,7 @@ Image Image::Normalization(int MM, int NN)
 
 double Image::getPixel(int i)
 {
-	return pixel[i]; 
+	return pixel[i];
 }
 
 // initial a curve in an image according to the initial condition of the PDE
@@ -545,7 +537,7 @@ Image Image::InitialCurve()
 	double e =1.;
 
 	Image temp (row, col);
-	
+
 	LevelADT tempX;
 	Matrix phi(row, col);
 
@@ -553,15 +545,15 @@ Image Image::InitialCurve()
 
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		if (phi(i+1, j+1) >= -e&& phi(i+1, j+1)<= e)
-			temp(i,j)= 155;  
-		else 
+			temp(i,j)= 155;
+		else
 			temp(i,j)= 0;
 	}
-	
-	return temp; 
+
+	return temp;
 }
 
 
@@ -571,7 +563,7 @@ Image Image::moveCurve()
 	double e =1./8.;
 
 	Image temp (row, col);
-	
+
 	LevelADT X1;
 	Matrix phi(row, col);
 
@@ -595,16 +587,16 @@ Image Image::moveCurve()
 	phi = uR;
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		if (phi(i+1, j+1) >-e && phi(i+1, j+1)<= e)
 		{
-			temp(i,j)= 155; 
-		}else 
+			temp(i,j)= 155;
+		}else
 			temp(i,j)= 0;
 	}
-	
-	return temp; 
+
+	return temp;
 }
 */
 
@@ -618,7 +610,7 @@ void Image::allocateMem( )
  	 phi1[i] = new double [col];
  	 if (!phi1[i])
 		{
-	 	 cerr << "Image: Not enough memory for allocateMem!!" 
+	 	 cerr << "Image: Not enough memory for allocateMem!!"
 			<< endl;
 	 	 exit(-1);
 		}
@@ -633,7 +625,7 @@ void Image::allocateMem( )
  	 phi2[i] = new double [col];
  	 if (!phi2[i])
 		{
-	 	 cerr << "Image: Not enough memory for allocateMem!!" 
+	 	 cerr << "Image: Not enough memory for allocateMem!!"
 			<< endl;
 	 	 exit(-1);
 		}
@@ -645,7 +637,7 @@ void Image::allocateMem( )
 void Image::deAllocateMem ( )
 {
 	 for (int i = 0; i < row; i++)
-	 {	
+	 {
 		 delete phi1[i];
 		 delete phi2[i];
 	 }
@@ -654,7 +646,7 @@ void Image::deAllocateMem ( )
 }
 
 //initial a curve acrroding phi values (square)
-Image Image::initializePhiPart_s(int L, int W) 
+Image Image::initializePhiPart_s(int L, int W)
 {
 	int i, j;
 	double x0 = (double)row;	//cneter of the circle
@@ -668,7 +660,7 @@ Image Image::initializePhiPart_s(int L, int W)
 	allocateMem();
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		temp(i,j)= 0;
 		if(abs(i-row/2)<L/2&&abs(j-col/2)<W/2){
@@ -683,14 +675,14 @@ Image Image::initializePhiPart_s(int L, int W)
 
 
 	}
-	
-		return temp; 
+
+		return temp;
 }
 
 
 
 //initial a curve acrroding phi values (2 circles)
-Image Image::initializePhiPart_2(double R1, double R2) 
+Image Image::initializePhiPart_2(double R1, double R2)
 {
 	int i, j;
 	double x0 = (double)row;	//cneter of the circle
@@ -704,36 +696,36 @@ Image Image::initializePhiPart_2(double R1, double R2)
 	allocateMem();
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		dis1 = pow((i - (x0/3.+ dx)),2)+ pow((j - 1.5*y0/3.),2);
 		dis4 = pow((i - (2.*x0/3.-dx)),2)+ pow((j - 1.5*y0/3.),2);
 
-		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e ) 
-			temp(i,j)= 255; 
+		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e )
+			temp(i,j)= 255;
 		else if (sqrt(dis4) > R2-e && sqrt(dis4) <= R2+e )
 			temp(i,j)= -255;
 		else
 			temp(i,j)= 0;
 
 		if(sqrt(dis1)<=R1)
-			phi1[i][j]= 1;  
+			phi1[i][j]= 1;
 		else if (sqrt(dis1) > R1)
 			phi1[i][j]= -1;
 //		else phi1[i][j]= 0;
 
 		if(sqrt(dis4)<=R2-0)
-			phi2[i][j]= 1;  
+			phi2[i][j]= 1;
 		else if (sqrt(dis4) > R2+0)
 			phi2[i][j]= -1;
 //		phi2[i][j]= 1;
 	}
-	
-		return temp; 
+
+		return temp;
 }
 
 //initial a curve acrroding phi values (4 circles)
-Image Image::initializePhiPart_4(double R1, double R2) 
+Image Image::initializePhiPart_4(double R1, double R2)
 {
 	int i, j;
 	double x0 = (double)row;	//cneter of the circle
@@ -747,15 +739,15 @@ Image Image::initializePhiPart_4(double R1, double R2)
 	allocateMem();
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 		dis1 = pow((i - (x0/4.+dx)),2)+ pow((j - y0/4.-10),2);
 		dis3 = pow((i - (x0/4.+dx)),2)+ pow((j - 3.*y0/4.+10),2);
 		dis2 = pow((i - (3.*x0/4.- dx+20)),2)+ pow((j - y0/4.-10.),2);
 		dis4 = pow((i - (3.*x0/4.- dx+20)),2)+ pow((j - 3.*y0/4.+ 10.),2);
 
-		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e ) 
-			temp(i,j)= 255; 
+		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e )
+			temp(i,j)= 255;
 		else if (sqrt(dis2) > R2-e && sqrt(dis2) <= R2+e )
 			temp(i,j)= -255;
 		else if (sqrt(dis3) > R1-e && sqrt(dis3) <= R1+e )
@@ -766,21 +758,21 @@ Image Image::initializePhiPart_4(double R1, double R2)
 			temp(i,j)= 0;
 
 		if(sqrt(dis1)<R1-e||sqrt(dis3)<R1-e)
-			phi1[i][j]= 1;  
-		else 
+			phi1[i][j]= 1;
+		else
 			phi1[i][j]= -1;
 
 		if(sqrt(dis2)<R2-0||sqrt(dis4)<R2-0)
-			phi2[i][j]= 1;  
+			phi2[i][j]= 1;
 		else
 			phi2[i][j]= -1;
 	}
-	
-		return temp; 
+
+		return temp;
 }
 
 //initial a curve acrroding phi values (multi circles)
-Image Image::initializePhiPart_6(double R1, double R2) 
+Image Image::initializePhiPart_6(double R1, double R2)
 {
 	int i, j;
 	double x0 = (double)row/4.50;	//cneter of the circle
@@ -796,56 +788,56 @@ Image Image::initializePhiPart_6(double R1, double R2)
 	allocateMem();
 
 
-	for (i=0; i<row; i++) 
-	for (j=0; j<col; j++) 
+	for (i=0; i<row; i++)
+	for (j=0; j<col; j++)
 	{
-		for (int m=0; m<3; m++) 
-		for (int n = 0; n<2; n++) 
+		for (int m=0; m<3; m++)
+		for (int n = 0; n<2; n++)
 		{
 			d[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy)),2));
 			dd[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy + 15.)),2));
-		}															// 50 for tri1	
+		}															// 50 for tri1
 
-		for (m=0; m<3; m++) 
-		for (int n = 0; n<2; n++) 
+		for (m=0; m<3; m++)
+		for (int n = 0; n<2; n++)
 		{
-			if(d[m][n] > R1-e && d[m][n] <= R1+e) 
+			if(d[m][n] > R1-e && d[m][n] <= R1+e)
 			temp(i,j)= 155;  // firsrt circle set
 			else if (dd[m][n] > R2-e && dd[m][n] <= R2+e)
 			temp(i,j)= -255; // second circle set
 		}
 
 // initial phi1 and phi2
-		for (m=0; m<3; m++) 
-		for (int n =0; n<2; n++) 
-		{ 
+		for (m=0; m<3; m++)
+		for (int n =0; n<2; n++)
+		{
 			if(d[m][n]<R1-e)
-				phi1[i][j]= 1;  
+				phi1[i][j]= 1;
 			else if (d[m][n] > R1+e)
 				phi1[i][j]= -1;
 			else phi1[i][j]= 0;
 
 		// initial phi2
 			if(dd[m][n]<R2-0)
-				phi2[i][j]= 1;  
+				phi2[i][j]= 1;
 			else if (dd[m][n] > R2+0)
 				phi2[i][j]= -1;
 			else phi2[i][j]= 0;
 		}
 	} // end for (i ,j) loop
 
-		return temp; 
-} 
+		return temp;
+}
 
 //initial a curve acrroding phi values (multi circles)
-Image Image::initializePhiPart_m(double R1, double R2) 
+Image Image::initializePhiPart_m(double R1, double R2)
 {
 	int i, j;
 
 /*	double x0 = (double)row/11.0;	//cneter of the circle
 	double y0 = (double)col/11.0;
 	double dx = 28.0, dy = 36.0;	// 8, 6
-*/ 
+*/
 	double x0 = (double)row/11.0;	//cneter of the circle
 	double y0 = (double)col/11.0;
 	double dx = 21.0, dy = 21.0;	// 10, 10
@@ -859,20 +851,20 @@ Image Image::initializePhiPart_m(double R1, double R2)
 	allocateMem();
 
 
-	for (i=0; i<row; i++) 
-	for (j=0; j<col; j++) 
+	for (i=0; i<row; i++)
+	for (j=0; j<col; j++)
 	{
-		for (int m=0; m<10; m++) 
-		for (int n = 0; n<10; n++) 
+		for (int m=0; m<10; m++)
+		for (int n = 0; n<10; n++)
 		{
 			d[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy)),2));
 			dd[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy +8.)),2));
 		}				//	[8]6], 10
 
-		for (m=0; m<10; m++) 
-		for (int n = 0; n<10; n++) 
+		for (m=0; m<10; m++)
+		for (int n = 0; n<10; n++)
 		{
-			if(d[m][n] > R1-e && d[m][n] <= R1+e) 
+			if(d[m][n] > R1-e && d[m][n] <= R1+e)
 			temp(i,j)= 155;  // firsrt circle set
 			else if (dd[m][n] > R2-e && dd[m][n] <= R2+e)
 			temp(i,j)= -255; // second circle set
@@ -881,7 +873,7 @@ Image Image::initializePhiPart_m(double R1, double R2)
 // initial phi1 and phi2
 		int flag=0;
 		for (m=0; m<10; m++){
-			for (int n =0; n<10; n++){ 
+			for (int n =0; n<10; n++){
 			if(dd[m][n]<R1){
 				phi1[i][j]= 0.1;
 				flag=1;
@@ -912,20 +904,20 @@ Image Image::initializePhiPart_m(double R1, double R2)
 			phi2[i][j]= -0.1;
 	} // end for (i ,j) loop
 
-		return temp; 
+		return temp;
 }
 
 
 
 //initial a curve acrroding phi values (multi circles)
-Image Image::initializePhiPart_n(double R1, double R2) 
+Image Image::initializePhiPart_n(double R1, double R2)
 {
 	int i, j;
 
 /*	double x0 = (double)row/11.0;	//cneter of the circle
 	double y0 = (double)col/11.0;
 	double dx = 28.0, dy = 36.0;	// 8, 6
-*/ 
+*/
 	double x0 = (double)row/20.0;	//cneter of the circle
 	double y0 = (double)col/20.0;
 	double dx = 12.0, dy = 12.0;	// 10, 10
@@ -939,20 +931,20 @@ Image Image::initializePhiPart_n(double R1, double R2)
 	allocateMem();
 
 
-	for (i=0; i<row; i++) 
-	for (j=0; j<col; j++) 
+	for (i=0; i<row; i++)
+	for (j=0; j<col; j++)
 	{
-		for (int m=0; m<20; m++) 
-		for (int n = 0; n<20; n++) 
+		for (int m=0; m<20; m++)
+		for (int n = 0; n<20; n++)
 		{
 			d[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy)),2));
 			dd[m][n] = sqrt(pow((i - (x0+m*dx)),2)+ pow((j - (y0+n*dy +4.)),2));
 		}				//	[8]6], 10
 
-		for (m=0; m<20; m++) 
-		for (int n = 0; n<20; n++) 
+		for (m=0; m<20; m++)
+		for (int n = 0; n<20; n++)
 		{
-			if(d[m][n] > R1-e && d[m][n] <= R1+e) 
+			if(d[m][n] > R1-e && d[m][n] <= R1+e)
 			temp(i,j)= 155;  // firsrt circle set
 			else if (dd[m][n] > R2-e && dd[m][n] <= R2+e)
 			temp(i,j)= -255; // second circle set
@@ -961,7 +953,7 @@ Image Image::initializePhiPart_n(double R1, double R2)
 // initial phi1 and phi2
 		int flag=0;
 		for (m=0; m<20; m++){
-			for (int n =0; n<20; n++){ 
+			for (int n =0; n<20; n++){
 			if(dd[m][n]<R1){
 				phi1[i][j]= 0.1;
 				flag=1;
@@ -992,7 +984,7 @@ Image Image::initializePhiPart_n(double R1, double R2)
 			phi2[i][j]= -0.1;
 	} // end for (i ,j) loop
 
-		return temp; 
+		return temp;
 }
 
 
@@ -1005,20 +997,20 @@ void Image::average(double &n1, double &n2, double &n3, double &n4,
 	double c1=0., c2=0., c3=0., c4=0. ;
    // n1=0, n2=0, n3=0, n4=0;
 //	c01=0., c02=0., c03=0., c04=0.;
-	
+
 	Image Hphi1(row, col), Hphi2(row, col);
 
-	for (int x = 0; x < row; x++) 
+	for (int x = 0; x < row; x++)
 	for (int y = 0; y < col; y++)
 	{
 		Hphi1(x,y) = 1.0/2.0*(1+2./PI*atan(phi1[x][y]/epsilon));
 		Hphi2(x,y) = 1.0/2.0*(1+2./PI*atan(phi2[x][y]/epsilon));
 	}
 
-	for (int i = 0; i < row; i++) 
+	for (int i = 0; i < row; i++)
 	for (int j = 0; j < col; j++)
 	{
-		
+
 		c1 += pixel[i*col+j]*Hphi1(i,j)*Hphi2(i,j);
 		n1 += Hphi1(i,j)*Hphi2(i,j);
 		c2 += pixel[i*col+j]*(1.-Hphi1(i,j))*(1.-Hphi2(i,j));
@@ -1033,20 +1025,20 @@ void Image::average(double &n1, double &n2, double &n3, double &n4,
 	c01 = c1/n1;
 	c02 = c2/n2;
 	c03 = c3/n3;
-	c04 = c4/n4;	
-/*	
+	c04 = c4/n4;
+/*
 //	int m=0, n=0;
 	double c1=0., c2=0., c3=0., c4=0. ;
 	n1=0, n2=0, n3=0, n4=0;
 	c01=0., c02=0., c03=0., c04=0.;
 
-	for (int i = 0; i < row; i++) 
+	for (int i = 0; i < row; i++)
 	for (int j = 0; j < col; j++)
 	{
 		if ((phi1[i][j] > 0)&& (phi2[i][j] > 0)) {		//Inside
 			c1 += pixel[i*col + j];
 			n1++;
-		} else if ((phi1[i][j] < 0)&&(phi2[i][j]< 0)){ //if (phi[i][j] >=0) 
+		} else if ((phi1[i][j] < 0)&&(phi2[i][j]< 0)){ //if (phi[i][j] >=0)
 			c2 += pixel[i*col + j];
 			n2++;
 		} else if ((phi1[i][j] > 0) && (phi2[i][j] < 0)) {
@@ -1055,9 +1047,9 @@ void Image::average(double &n1, double &n2, double &n3, double &n4,
 		} else if ((phi1[i][j] < 0)&& (phi2[i][j] > 0)) {
 			c4 += pixel[i*col + j];
 			n4++;
-		} 
+		}
 	}
-	
+
 		c01 = c1/(double)n1;
 		c02 = c2/(double)n2;
 		c03 = c3/(double)n3;
@@ -1068,34 +1060,34 @@ void Image::average(double &n1, double &n2, double &n3, double &n4,
 
 
 //calculate the difference of energy
-double Image::energyDifference(int x, int y, double &m, double &n, 
+double Image::energyDifference(int x, int y, double &m, double &n,
 							   double &c1, double &c2)
 {
 	double F12=0.;
-	F12 = pow((pixel[x*col+y]-c2),2)*n/(double)(n+1) - 
+	F12 = pow((pixel[x*col+y]-c2),2)*n/(double)(n+1) -
 		  pow((pixel[x*col+y]-c1),2)*m/(double)(m-1);
 
 		return F12;
 }
 
-double Image::energyDifference2(int x, int y, double &m, double &n, 
+double Image::energyDifference2(int x, int y, double &m, double &n,
 							   double &c1, double &c2)
 {
 	double F21=0.;
-	F21 = pow((pixel[x*col+y]-c1),2)*m/(double)(m+1) - 
+	F21 = pow((pixel[x*col+y]-c1),2)*m/(double)(m+1) -
 		  pow((pixel[x*col+y]-c2),2)*n/(double)(n-1);
 
 		return F21;
 }
 
-// update the image after iterations Using direct energy calculation 
+// update the image after iterations Using direct energy calculation
 Image Image::updateD()
 {
 	int x, y;
-	
+
 	double n00=0, n10=0, n01=0, n11=0;
 	double c00=0., c10=0., c01=0., c11=0.;
-	
+
 	double E11_00=0., E11_10=0., E11_01=0.;
 	double E00_11=0., E00_10=0., E00_01=0.;
 	double E10_11=0., E10_00=0., E10_01=0.;
@@ -1103,15 +1095,15 @@ Image Image::updateD()
 
 	Image temp1 (row, col);
 	Image temp2 (row, col);
-	
+
 	average(n11, n00, n10, n01, c11, c00, c10, c01);
-  
+
 	cout<<"m = " <<n11 <<"	"<<n00  <<"	"<<n10<<"	"<<n01<<endl;
 	cout<<"c0 = " <<c11 <<"	"<<c00  <<"	"<<c01<<"	"<<c10<<endl;
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
-	{	
+	{
 		if((phi1[x][y] >= 0)&& (phi2[x][y] >= 0))
 		{
 		 E11_00 = energyDifference(x, y, n11, n00, c11, c00);
@@ -1119,12 +1111,12 @@ Image Image::updateD()
 		 E11_01 = energyDifference(x, y, n11, n01, c11, c01);
 			double minE =0.;
 			minE =min3(E11_00, E11_01, E11_10);
-		  if (minE<0) {		
-			if( E11_00<= minE) 
+		  if (minE<0) {
+			if( E11_00<= minE)
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = -1;
-			}else if( E11_10 <= minE) 
+			}else if( E11_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1139,7 +1131,7 @@ Image Image::updateD()
 				phi2[x][y] = 1;
 			}
 		} else if ((phi1[x][y] < 0)&&(phi2[x][y] < 0))
-		{	
+		{
 		   E00_11 = energyDifference2(x, y, n11, n00, c11, c00);
 		   E00_10 = energyDifference(x, y, n00, n10, c00, c10);
 		   E00_01 = energyDifference(x, y, n00, n01, c00, c01);
@@ -1147,11 +1139,11 @@ Image Image::updateD()
 			double minE =0.;
 			minE =min3(E00_11, E00_01, E00_10);
 		  if (minE <0) {
-			if( E00_11<=minE ) 
+			if( E00_11<=minE )
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E00_10 <= minE) 
+			}else if( E00_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1166,18 +1158,18 @@ Image Image::updateD()
 				phi2[x][y] = -1;
 			}
 		} else if ((phi1[x][y] >= 0)&&(phi2[x][y] < 0))
-		{	
-		   E10_11 = energyDifference(x, y, n10, n11, c10, c11); 
+		{
+		   E10_11 = energyDifference(x, y, n10, n11, c10, c11);
 		   E10_00 = energyDifference(x, y, n10, n00, c10, c00);
 		   E10_01 = energyDifference(x, y, n10, n01, c10, c01);
 			double minE =0.;
 			minE =min3(E10_11, E10_00, E10_01);
 		  if (minE <0) {
-			if( E10_11<= minE) 
+			if( E10_11<= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E10_00 <= minE) 
+			}else if( E10_00 <= minE)
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = -1;
@@ -1185,27 +1177,27 @@ Image Image::updateD()
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = 1;
-			} 
+			}
 		  } else //if  (minE>0)
-			{ 
-				//if 
+			{
+				//if
 			    phi1[x][y] =  1;
 				phi2[x][y] = -1;
 			}
 		}else if ((phi1[x][y] < 0)&&(phi2[x][y] >= 0))
-		{	
-		   E01_11 = energyDifference(x, y, n01, n11, c01, c11); 
+		{
+		   E01_11 = energyDifference(x, y, n01, n11, c01, c11);
 		   E01_00 = energyDifference(x, y, n01, n00, c01, c00);
 		   E01_10 = energyDifference(x, y, n01, n10, c01, c10);
 
 			double minE =0.;
 			minE =min3(E01_11, E01_10, E01_00);
-		  if (minE <0) { 
-			if( E01_11<= minE) 
+		  if (minE <0) {
+			if( E01_11<= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E01_10 <= minE) 
+			}else if( E01_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1219,7 +1211,7 @@ Image Image::updateD()
 				phi1[x][y] = -1;
 				phi2[x][y] = 1;
 			}
-		} 
+		}
 	}
 
 	average(n11, n00, n10, n01, c11, c00, c10, c01);
@@ -1227,42 +1219,42 @@ Image Image::updateD()
 	cout<<"n = " <<n11 <<"	"<<n00  <<"	"<<n10<<"	"<<n01<<endl;
 	cout<<"c = " <<c11 <<"	"<<c00  <<"	"<<c10<<"	"<<c01<<endl;
 
-//	Segmentation Only 
+//	Segmentation Only
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		if((phi1[x][y] >0)&&(phi2[x][y] >0) )
 		{
-			if((x > 0 && y > 0)&&  
+			if((x > 0 && y > 0)&&
 			(((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 			||((phi1[x-1][y]!= phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))))
 				temp1(x,y)=  c11;//0;//pixel[x*col + y]; // 0;
-			else 
-			temp1(x,y)=	c11; 
+			else
+			temp1(x,y)=	c11;
 		} else if((phi1[x][y] <0)&&(phi2[x][y] <0) )
 		{
-			if((x > 0 && y > 0) &&  
+			if((x > 0 && y > 0) &&
 			(((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 			||((phi1[x-1][y]!= phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))))
 				temp1(x,y)= c00;//c00;//0;//pixel[x*col + y]; //0;
-			else 
+			else
 				temp1(x,y)=	c00;//00;
 		} else if((phi1[x][y] >0)&&(phi2[x][y] <0) )
 		{
-			if((x > 0 && y > 0) &&  
+			if((x > 0 && y > 0) &&
 			(((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 			||((phi1[x-1][y]!= phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))))
 				temp1(x,y)= c10;//pixel[x*col + y]; //0;
-			else 
+			else
 				temp1(x,y)=	c10;
 		} else if((phi1[x][y] <0)&&(phi2[x][y] >0) )
 		{
-			if((x > 0 && y > 0) &&  
+			if((x > 0 && y > 0) &&
 			(((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 			||((phi1[x-1][y]!= phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))))
 				temp1(x,y)= pixel[x*col + y]; //0;
-			else 
+			else
 				temp1(x,y)=	c01;
 		}
 		//	else if( phi1[x][y] == 0 || phi2[x][y]==0)
@@ -1270,32 +1262,32 @@ Image Image::updateD()
 	}
 
 
-	for (x = 0; x < row-0; x++) 
+	for (x = 0; x < row-0; x++)
 	for (y = 0; y < col-0; y++)
 	{
-		if ( (x > 0 && y > 0 )&& //x<row-1 && y<col-1) &&  
+		if ( (x > 0 && y > 0 )&& //x<row-1 && y<col-1) &&
 		 ( ((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 		 ||((phi1[x-1][y] != phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))
 		 ||((phi1[x-1][y] != phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))
 		 ||((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y])) )
 		 )
 		  temp2(x,y)= 255;
-		else 
+		else
 		 temp2(x, y) = temp1(x, y);
 	}
 
 //		return temp1; // no contours
-		return temp2; 
+		return temp2;
 }
 
-// segmentation then denoising 
+// segmentation then denoising
 Image Image::DeNoise(Image &temp0)
 {
 	int x, y;
-	
+
 	double n00=0, n10=0, n01=0, n11=0;
 	double c00=0., c10=0., c01=0., c11=0.;
-	
+
 	double E11_00=0., E11_10=0., E11_01=0.;
 	double E00_11=0., E00_10=0., E00_01=0.;
 	double E10_11=0., E10_00=0., E10_01=0.;
@@ -1303,16 +1295,16 @@ Image Image::DeNoise(Image &temp0)
 
 	Image temp1 (row, col);
 	Image temp2 (row, col);
-	
+
 	average(n11, n00, n10, n01, c11, c00, c10, c01);
-  
+
 	cout<<"m = " <<n11 <<"	"<<n00  <<"	"<<n10<<"	"<<n01<<endl;
 	cout<<"c0 = " <<c11 <<"	"<<c00  <<"	"<<c01<<"	"<<c10<<endl;
 
-// segementation 
-	for (x = 0; x < row; x++) 
+// segementation
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
-	{	
+	{
 		if((phi1[x][y] >= 0)&& (phi2[x][y] >= 0))
 		{
 		 E11_00 = energyDifference(x, y, n11, n00, c11, c00);
@@ -1320,12 +1312,12 @@ Image Image::DeNoise(Image &temp0)
 		 E11_01 = energyDifference(x, y, n11, n01, c11, c01);
 			double minE =0.;
 			minE =min3(E11_00, E11_01, E11_10);
-		  if (minE<0) {		
-			if( E11_00<= minE) 
+		  if (minE<0) {
+			if( E11_00<= minE)
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = -1;
-			}else if( E11_10 <= minE) 
+			}else if( E11_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1336,11 +1328,11 @@ Image Image::DeNoise(Image &temp0)
 			}
 		  } else //if  (minE>0)
 			{
-				phi1[x][y] = 1; 
+				phi1[x][y] = 1;
 				phi2[x][y] = 1;
 			}
 		} else if ((phi1[x][y] < 0)&&(phi2[x][y] < 0))
-		{	
+		{
 		   E00_11 = energyDifference2(x, y, n11, n00, c11, c00);
 		   E00_10 = energyDifference(x, y, n00, n10, c00, c10);
 		   E00_01 = energyDifference(x, y, n00, n01, c00, c01);
@@ -1348,11 +1340,11 @@ Image Image::DeNoise(Image &temp0)
 			double minE =0.;
 			minE =min3(E00_11, E00_01, E00_10);
 		  if (minE <0) {
-			if( E00_11<=minE ) 
+			if( E00_11<=minE )
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E00_10 <= minE) 
+			}else if( E00_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1367,18 +1359,18 @@ Image Image::DeNoise(Image &temp0)
 				phi2[x][y] = -1;
 			}
 		} else if ((phi1[x][y] >= 0)&&(phi2[x][y] < 0))
-		{	
-		   E10_11 = energyDifference(x, y, n10, n11, c10, c11); 
+		{
+		   E10_11 = energyDifference(x, y, n10, n11, c10, c11);
 		   E10_00 = energyDifference(x, y, n10, n00, c10, c00);
 		   E10_01 = energyDifference(x, y, n10, n01, c10, c01);
 			double minE =0.;
 			minE =min3(E10_11, E10_00, E10_01);
 		  if (minE <0) {
-			if( E10_11<= minE) 
+			if( E10_11<= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E10_00 <= minE) 
+			}else if( E10_00 <= minE)
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = -1;
@@ -1386,26 +1378,26 @@ Image Image::DeNoise(Image &temp0)
 			{
 				phi1[x][y] = -1;
 				phi2[x][y] = 1;
-			} 
+			}
 		  } else //if  (minE>0)
-			{ 
+			{
 			    phi1[x][y] =  1;
 				phi2[x][y] = -1;
 			}
 		}else if ((phi1[x][y] < 0)&&(phi2[x][y] >= 0))
-		{	
-		   E01_11 = energyDifference(x, y, n01, n11, c01, c11); 
+		{
+		   E01_11 = energyDifference(x, y, n01, n11, c01, c11);
 		   E01_00 = energyDifference(x, y, n01, n00, c01, c00);
 		   E01_10 = energyDifference(x, y, n01, n10, c01, c10);
 
 			double minE =0.;
 			minE =min3(E01_11, E01_10, E01_00);
-		  if (minE <0) { 
-			if( E01_11<= minE) 
+		  if (minE <0) {
+			if( E01_11<= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = 1;
-			}else if( E01_10 <= minE) 
+			}else if( E01_10 <= minE)
 			{
 				phi1[x][y] = 1;
 				phi2[x][y] = -1;
@@ -1419,7 +1411,7 @@ Image Image::DeNoise(Image &temp0)
 				phi1[x][y] = -1;
 				phi2[x][y] = 1;
 			}
-		} 
+		}
 	}
 // output the segmented 4 regions constants
 	average(n11, n00, n10, n01, c11, c00, c10, c01);
@@ -1428,7 +1420,7 @@ Image Image::DeNoise(Image &temp0)
  cout<<"c = " <<c11 <<"	"<<c00  <<"	"<<c10<<"	"<<c01<<endl;
 
 
-//DeNoising 
+//DeNoising
 
 
 	Image oimg11(row, col), oimg00(row, col), oimg10(row, col),
@@ -1453,11 +1445,11 @@ Image Image::DeNoise(Image &temp0)
 	Matrix uRnewn01(nx, ny);
 
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		if (phi1[x][y] >=0 &&phi2[x][y] >=0)
-		{			
+		{
 			if(x>0 && y>0 && x<row-1 && y<col-1)
 			{
 				if(phi1[x][y-1] != phi1[x][y]||phi2[x][y-1] != phi2[x][y]) // boundary conditions
@@ -1473,22 +1465,22 @@ Image Image::DeNoise(Image &temp0)
 				else if(phi1[x+1][y] != phi1[x][y]||phi2[x+1][y] != phi2[x][y])
 				{
 					oimg11(x,y)	= temp0(x+1,y);
-				} // end of boundary conditions 
+				} // end of boundary conditions
 				else{
 				oimg11(x,y)	= temp0(x,y);
 				}
-			} else 
+			} else
 			oimg11(x,y)	= temp0(x,y);
 
-			oimg00(x,y)	= c00; 
-			oimg10(x,y)	= c10;  
-			oimg01(x,y)	= c01;  
+			oimg00(x,y)	= c00;
+			oimg10(x,y)	= c10;
+			oimg01(x,y)	= c01;
 		} else if ((phi1[x][y] < 0)&&(phi2[x][y] < 0))
 		{
 			oimg00(x,y)	= temp0(x,y);
 			oimg11(x,y)	= c11;
-			oimg10(x,y)	= c10; 
-			oimg01(x,y)	= c01; 
+			oimg10(x,y)	= c10;
+			oimg01(x,y)	= c01;
 		}else if ((phi1[x][y] >= 0)&&(phi2[x][y] < 0))
 		{
 			if(x>0 && y>0 && x<row-1 && y<col-1)
@@ -1506,16 +1498,16 @@ Image Image::DeNoise(Image &temp0)
 				else if(phi1[x+1][y] != phi1[x][y])
 				{
 					oimg10(x,y)	= temp0(x+1,y);
-				} // end of boundary conditions 
+				} // end of boundary conditions
 				else{
 				oimg10(x,y)	= temp0(x,y);
 				}
-			} else 
+			} else
 				oimg10(x,y)	= temp0(x,y);
 
-				oimg00(x,y)	= c00; 			
-				oimg11(x,y)	= c11; 			
-				oimg01(x,y)	= c01; 
+				oimg00(x,y)	= c00;
+				oimg11(x,y)	= c11;
+				oimg01(x,y)	= c01;
 		} else if ((phi1[x][y] < 0)&&(phi2[x][y] >= 0))
 		{
 			if(x>0 && y>0 && x<row-1 && y<col-1)
@@ -1533,43 +1525,43 @@ Image Image::DeNoise(Image &temp0)
 				else if(phi2[x+1][y] != phi2[x][y])
 				{
 					oimg01(x,y)	= temp0(x+1,y);
-				} // end of boundary conditions 
+				} // end of boundary conditions
 				else{
 				oimg01(x,y)	= temp0(x,y);
 				}
-			} else 
+			} else
 				oimg01(x,y)	= temp0(x,y);
 
-			oimg00(x,y)	= c00; 			
-			oimg11(x,y)	= c11; 
-			oimg10(x,y)	= c10; 
+			oimg00(x,y)	= c00;
+			oimg11(x,y)	= c11;
+			oimg10(x,y)	= c10;
 			}
 	}
-	 
+
 	Xn11.init(uRn11, oimg11);
 	Xn00.init(uRn00, oimg00);
 	Xn10.init(uRn10, oimg10);
 	Xn01.init(uRn01, oimg01);
-	
-// for phi1 > 0 and phi2 > 0 
+
+// for phi1 > 0 and phi2 > 0
 	for (int k=0; k<3; k++)
 	{
 		uRnewn11 = Xn11.solver(kapp, dtt, uRn11); // solve Gassian denoise equation using ADI
 		uRn11 = uRnewn11;
 	}
-// for phi1 < 0 and phi2 < 0 
+// for phi1 < 0 and phi2 < 0
 	for (k=0; k<2; k++)
 	{
 		uRnewn00 = Xn00.solver(kapp, dtt, uRn00); // solve Gassian denoise equation using ADI
 		uRn00 = uRnewn00;
 	}
-// for phi1 > 0 and phi2 < 0 
+// for phi1 > 0 and phi2 < 0
 	for (k=0; k<2; k++)
 	{
 		uRnewn10 = Xn10.solver(kapp, dtt, uRn10); // solve Gassian denoise equation using ADI
 		uRn10 = uRnewn10;
 	}
-// for phi1 < 0 and phi2 > 0 
+// for phi1 < 0 and phi2 > 0
 	for (k=0; k<3; k++)
 	{
 		uRnewn01 = Xn01.solver(kapp*10, dtt, uRn01); // solve Gassian denoise equation using ADI
@@ -1578,7 +1570,7 @@ Image Image::DeNoise(Image &temp0)
 
 // Output the Denoised image
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		if((phi1[x][y] >0)&&(phi2[x][y] >0) )
@@ -1586,40 +1578,40 @@ Image Image::DeNoise(Image &temp0)
  			temp1(x,y)=	uRn11(x+1,y+1);
 		} else if((phi1[x][y] <0)&&(phi2[x][y] <0) )
 		{
-			temp1(x,y)= uRn00(x+1,y+1); 
+			temp1(x,y)= uRn00(x+1,y+1);
 		} else if((phi1[x][y] >=0)&&(phi2[x][y] <0) )
 		{
 			temp1(x,y)=	 uRn10(x+1,y+1);
 		} else if((phi1[x][y] <0)&&(phi2[x][y] >=0) )
 		{
-			temp1(x,y)=	uRn01(x+1,y+1); 
-		} 
+			temp1(x,y)=	uRn01(x+1,y+1);
+		}
 	}
 
 
  // Output and mark the edges
 
-	for (x = 0; x < row-0; x++) 
+	for (x = 0; x < row-0; x++)
 	for (y = 0; y < col-0; y++)
 	{
-		if ( (x > 0 && y > 0 && x<row-1 && y<col-1) &&  
+		if ( (x > 0 && y > 0 && x<row-1 && y<col-1) &&
 		 ( ((phi1[x][y-1] != phi1[x][y]) || (phi2[x][y-1] != phi2[x][y]))
 		 ||((phi1[x-1][y] != phi1[x][y]) || (phi2[x-1][y] != phi2[x][y]))
 		 ||((phi1[x+1][y] != phi1[x][y]) || (phi2[x+1][y] != phi2[x][y]))
 		 ||((phi1[x][y+1] != phi1[x][y]) || (phi2[x][y+1] != phi2[x][y])))
 		 )
 		  temp2(x,y)= 255;
-		else 
+		else
 		 temp2(x, y) = temp1(x, y);
 	}
 
 		return temp1; // no contours oimg01; //
-//		return temp2; 
+//		return temp2;
 }
 
 // ***************************************************************************
 //
-//	Solving the level set equations 
+//	Solving the level set equations
 //
 // ***************************************************************************
 
@@ -1631,20 +1623,20 @@ void Image::average(double &c11, double &c00,double &c10, double &c01)
 	double c1=0., c2=0., c3=0., c4=0. ;
 	double n1=0, n2=0, n3=0, n4=0;
 	c11=0., c00=0., c10=0., c01=0.;
-	
+
 	Image Hphi1(row, col), Hphi2(row, col);
 
-	for (int x = 0; x < row; x++) 
+	for (int x = 0; x < row; x++)
 	for (int y = 0; y < col; y++)
 	{
 		Hphi1(x,y) = 1.0/2.0*(1+2./PI*atan(phi1[x][y]/epsilon));
 		Hphi2(x,y) = 1.0/2.0*(1+2./PI*atan(phi2[x][y]/epsilon));
 	}
 
-	for (int i = 0; i < row; i++) 
+	for (int i = 0; i < row; i++)
 	for (int j = 0; j < col; j++)
 	{
-		
+
 		c1 += pixel[i*col+j]*Hphi1(i,j)*Hphi2(i,j);
 		n1 += Hphi1(i,j)*Hphi2(i,j);
 		c2 += pixel[i*col+j]*(1.-Hphi1(i,j))*(1.-Hphi2(i,j));
@@ -1668,8 +1660,8 @@ void Image::average(double &c1, double &c0)
 	double n1=0, n0=0;
 	c1=0;
 	c0=0;
-	
-	for (int i = 0; i < row; i++) 
+
+	for (int i = 0; i < row; i++)
 	for (int j = 0; j < col; j++)
 	{
 		if(phi1[i][j]>=0){
@@ -1686,10 +1678,10 @@ void Image::average(double &c1, double &c0)
 	c0 = c0/n0;
 }
 
-// update the image after iterations Using Level set Method 
+// update the image after iterations Using Level set Method
 Image Image::updateLevel(double &fact)
 {
-	
+
 	int x, y;
 
 // segmentation
@@ -1705,7 +1697,7 @@ Image Image::updateLevel(double &fact)
 
 	Matrix  Hphi2(row, col), Hphi1(row, col);
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		temp(x,y) = pixel[x*col+y];
@@ -1717,7 +1709,7 @@ Image Image::updateLevel(double &fact)
 	Matrix uR2(nx, ny);
 	Matrix uRnew2(nx, ny);
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		uR1(x+1,y+1) = phi1[x][y];
@@ -1742,7 +1734,7 @@ Image Image::updateLevel(double &fact)
     cvNamedWindow( WinName, CV_WINDOW_AUTOSIZE );
 
 	IplImage* iout = cvCreateImage(cvSize(col,row), 8, 3 );
-//------------------------------------------------	
+//------------------------------------------------
 	trans(iout);
 	cvSaveImage("init.tif",iout);
 
@@ -1751,13 +1743,13 @@ Image Image::updateLevel(double &fact)
 	{
 		n++;
 		average1(c11, c00, c10, c01);
-		
-		for (x = 0; x < row; x++) 
+
+		for (x = 0; x < row; x++)
 		for (y = 0; y < col; y++)
 		{
 /*			Hphi1(x+1,y+1) = 1.0/2.0*(1+2./PI*atan(phi1[x][y]/epsilon));
 			Hphi2(x+1,y+1) = 1.0/2.0*(1+2./PI*atan(phi2[x][y]/epsilon));
-*/		
+*/
 			if(phi1[x][y]>=0)
 				Hphi1(x+1,y+1)=1;
 			else
@@ -1773,10 +1765,10 @@ Image Image::updateLevel(double &fact)
 //		uRnew1= X1.ADTsolver1(mu, dt, uR1, temp, c11, c00, c10, c01, Hphi2);
 		X1.phi_2solver(mu, dtt, uR2, temp, c11, c00, c10, c01, Hphi1);
 //		uRnew2= X1.ADTsolver2(mu, dt, uR2, temp, c11, c00, c10, c01, Hphi1);
-	
+
 		ca1 = c11, ca2 = c00, ca3 = c10, ca4 = c01;
 
-		for (x = 0; x < row; x++) 
+		for (x = 0; x < row; x++)
 		for (y = 0; y < col; y++)
 		{
 			phi1[x][y] = uR1(x+1,y+1);
@@ -1799,7 +1791,7 @@ Image Image::updateLevel(double &fact)
 
 	trans(iout);
 	cvSaveImage("result.tif",iout);
-		return temp2; 
+		return temp2;
 }
 
 void Image::updateLevel1(double &fact)
@@ -1819,7 +1811,7 @@ void Image::updateLevel1(double &fact)
 	double dtt = 0.005;
 
 
-	for (x = 0; x < row; x++) 
+	for (x = 0; x < row; x++)
 	for (y = 0; y < col; y++)
 	{
 		temp(x,y) = pixel[x*col+y];
@@ -1828,7 +1820,7 @@ void Image::updateLevel1(double &fact)
 
 	Matrix uR1(nx, ny),uR0(nx,ny);
 
-	for (x = 0; x <row; x++) 
+	for (x = 0; x <row; x++)
 	for (y = 0; y <col; y++)
 	{
 		uR1(x+1,y+1) = phi1[x][y];
@@ -1851,7 +1843,7 @@ void Image::updateLevel1(double &fact)
     cvNamedWindow( WinName, CV_WINDOW_AUTOSIZE );
 
 	IplImage* iout = cvCreateImage(cvSize(col,row), 8, 3 );
-//------------------------------------------------	
+//------------------------------------------------
 	trans1(iout);
 	cvSaveImage("init.tif",iout);
 
@@ -1860,11 +1852,11 @@ void Image::updateLevel1(double &fact)
 	while(tstep2)
 	{
 		average(c1, c0);
-		
-		X1.FTCSsolver(mu,dtt,uR1,temp,c1,c0); //FTC approach
-	
 
-		for (x = 0; x < row; x++) 
+		X1.FTCSsolver(mu,dtt,uR1,temp,c1,c0); //FTC approach
+
+
+		for (x = 0; x < row; x++)
 		for (y = 0; y < col; y++)
 		{
 			phi1[x][y] = uR1(x+1,y+1);
@@ -1887,7 +1879,7 @@ void Image::updateLevel1(double &fact)
 		}
 */		uR0=uR1;
 		e1=energy1();
-	
+
 		if(fabs(e1-e0)< fact)
 		   tstep2 = 0;
 		else
@@ -1902,11 +1894,11 @@ void Image::updateLevel1(double &fact)
 //	cvReleaseVideoWriter(&writer);
 //----------------------------------------
 
-		return; 
+		return;
 }
 
 
-Image Image::creatImage(double R1, double R2) 
+Image Image::creatImage(double R1, double R2)
 {
 	int i, j;
 	double dis1, dis2;
@@ -1918,34 +1910,34 @@ Image Image::creatImage(double R1, double R2)
 //	allocateMem();
 
 	for (i=0; i<row; i++)
-	for (j=0; j<col; j++) 
+	for (j=0; j<col; j++)
 	{
 //*
 		dis1 = sqrt(pow((i - (double)row/2.0),2)+ pow((j - (double)col/2.0),2));
 		dis2 = sqrt(pow((i - (double)row/4.0),2)+ pow((j - (double)col/4.0),2));
-/*		
-		if(dis1 > R1 &&dis1 <= R1+e ) 
-			temp(i,j)= 80; 
+/*
+		if(dis1 > R1 &&dis1 <= R1+e )
+			temp(i,j)= 80;
 		else if (dis1 > R1+e && dis1 <= R1+ 2*e)
 			temp(i,j)= 160;
 		else if (dis1 > R1+ 2*e && dis1 <= R1+ 3*e)
 			temp(i,j)= 240;
-		else 
+		else
 			temp(i,j)= 120;
 
 /*/
-		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e ) 
-			temp(i,j)= 180; 
+		if(sqrt(dis1) > R1-e && sqrt(dis1) <= R1+e )
+			temp(i,j)= 180;
 		else if (sqrt(dis2) >= 0 && sqrt(dis2) <= R2+e )
 			temp(i,j)= 40;
 		else if (i>row/2 && i <row/1.2&& j>col/6 && j<col-60)
-			temp(i,j)= 250;	
-		else 
+			temp(i,j)= 250;
+		else
 			temp(i,j)= 200;
 /* /
 
 		if ((j-i >= 0) && (j+i >= 255))
-				temp(i,j)= 60;	
+				temp(i,j)= 60;
 		else if (i <128)
 			temp(i,j)= 140;
 		else if (i>=128 && j <128)
@@ -1957,7 +1949,7 @@ Image Image::creatImage(double R1, double R2)
 		if(dis1 <= R1)
 		{
 		if ((j-i >= 0) && (i>= 128))
-			temp(i,j)= 30;	
+			temp(i,j)= 30;
 		else if ((j+i>= 255)&&(i <128))
 			temp(i,j)= 70;
 		else if ((i <128)&&(j>=128))
@@ -1976,11 +1968,11 @@ Image Image::creatImage(double R1, double R2)
 		}else
 			temp(i,j) = 200;
 
-/ *	
+/ *
 		if(dis1 <= R1)
 		{
 		if ((j-i >= 0) && (j+i>= 255))
-			temp(i,j)= 20;	
+			temp(i,j)= 20;
 		else if ((j+i< 255)&&(j>= 128))
 			temp(i,j)= 200;
 		else if ((j <128)&&(j+i < 255))
@@ -2000,27 +1992,27 @@ Image Image::creatImage(double R1, double R2)
 			temp(i,j) = 110;
 /*
 
-		if (i>10&&j>10&&i<240&&j<240) 
+		if (i>10&&j>10&&i<240&&j<240)
 		{
 			if ((j-i >= 0) && (j+i< 250) && i< 158)
 				temp(i,j)= 0;
 			else if (i>160 &&i<200 && j >40 && j<210)
 				 temp(i,j)= 255;
-			else 
+			else
 			 temp(i,j)= 140;
 		}
-		else 
-			temp(i,j) = 140;	
+		else
+			temp(i,j) = 140;
 */
 	}
-	
-		return temp; 
+
+		return temp;
 }
 
 void Image::trans(IplImage*iout){
 	for(int y=0;y<row;y++){
 		for (int x=0;x<col;x++){
-			if ((x>1 && y>1 &&  x<row-2 && y<col-2) && 
+			if ((x>1 && y>1 &&  x<row-2 && y<col-2) &&
 				(phi1[y][x-1]<0 ||phi1[y-1][x]<0 ||
 				phi1[y][x+1]<0 ||phi1[y+1][x]<0)&& phi1[y][x]>0){
 				((uchar*)(iout->imageData
@@ -2030,7 +2022,7 @@ void Image::trans(IplImage*iout){
 				((uchar*)(iout->imageData
 					+iout->widthStep*y))[x*3+2]=0;
 			}
-			else if ((x>1 && y>1 &&  x<row-2 && y<col-2) && 
+			else if ((x>1 && y>1 &&  x<row-2 && y<col-2) &&
 				(phi2[y][x-1]<0 ||phi2[y-1][x]<0 ||
 				phi2[y][x+1]<0 ||phi2[y+1][x]<0)&& phi2[y][x]>0){
 				((uchar*)(iout->imageData
@@ -2052,7 +2044,7 @@ void Image::trans(IplImage*iout){
 void Image::trans1(IplImage*iout){
 	for(int y=0;y<row;y++){
 		for (int x=0;x<col;x++){
-			if ((x>1 && y>1 &&  x<row-2 && y<col-2) && 
+			if ((x>1 && y>1 &&  x<row-2 && y<col-2) &&
 				(phi1[y][x-1]<0 ||phi1[y-1][x]<0 ||
 				phi1[y][x+1]<0 ||phi1[y+1][x]<0)&& phi1[y][x]>0){
 				((uchar*)(iout->imageData
@@ -2077,10 +2069,10 @@ void Image::average1(double &c11, double &c00,double &c10, double &c01)
 	double c1=0., c2=0., c3=0., c4=0. ;
 	double n1=0, n2=0, n3=0, n4=0;
 	c11=0., c00=0., c10=0., c01=0.;
-	
+
 	Image Hphi1(row, col), Hphi2(row, col);
 
-	for (int x = 0; x < row; x++) 
+	for (int x = 0; x < row; x++)
 	for (int y = 0; y < col; y++)
 	{
 //		Hphi1(x,y) = 1.0/2.0*(1+2./PI*atan(phi1[x][y]/epsilon));
@@ -2097,10 +2089,10 @@ void Image::average1(double &c11, double &c00,double &c10, double &c01)
 
 	}
 
-	for (int i = 0; i < row; i++) 
+	for (int i = 0; i < row; i++)
 	for (int j = 0; j < col; j++)
 	{
-		
+
 		c1 += pixel[i*col+j]*Hphi1(i,j)*Hphi2(i,j);
 		n1 += Hphi1(i,j)*Hphi2(i,j);
 		c2 += pixel[i*col+j]*(1.-Hphi1(i,j))*(1.-Hphi2(i,j));
@@ -2130,7 +2122,7 @@ void Image::average1(double &c11, double &c00,double &c10, double &c01)
 }
 double Image::energy1(){
     int x,y;
-	
+
 	double U1,U2;
 
 	double sum1=0,sum2=0,l=0;

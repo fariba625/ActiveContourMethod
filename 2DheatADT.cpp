@@ -1,16 +1,8 @@
-/*******************************************************************
- * file:    2DheadADT.cpp 
- * version: 1.0
- * project: Comp7751 Assignment Project
- * author:  Song Gao
- * date:    April 25, 2003
- * description: Function implementations in class heatADT
- * 	           
- ******************************************************************/ 
+
 
 #include <iostream>
 #include <fstream>
-#include <assert.h>  
+#include <assert.h>
 #include <math.h>
 #include "DMatrix.h"
 
@@ -18,18 +10,18 @@
 
 #define PI 3.1415926
 
-         
+
 // default constructor
 heatADT::heatADT()
-{    
+{
 	Image temp;
-	nx = temp.getRow(); //256; 
-	ny = temp.getCol(); //256; 
+	nx = temp.getRow(); //256;
+	ny = temp.getCol(); //256;
 	dx = 1.;
 	dy =1.;
 }
 
-// Initial conditions 
+// Initial conditions
 void heatADT::init(Matrix &u, Image &u0)
 {
 	int j,k;
@@ -37,7 +29,7 @@ void heatADT::init(Matrix &u, Image &u0)
 	for(j=1; j<=nx; j++)
 	for(k=1; k<=ny; k++)
 	{ // a circle with Radius = 80
-	//	u(j, k) = sqrt(pow((j - (double)nx/2.0),2)+ 
+	//	u(j, k) = sqrt(pow((j - (double)nx/2.0),2)+
 	//			  pow((k - (double)ny/2.0),2))-100.; //80
 		u(j,k) = u0(j,k);
 	}
@@ -50,12 +42,12 @@ Matrix heatADT::getrhsB(int k, double ry, Matrix &u)
 {
 	int j,  kk=1;
 	Matrix rhSide(nx,1);
-	
-		for(j=1; j<nx-1; j++) 
+
+		for(j=1; j<nx-1; j++)
 		{
 			if (k == 1)
 			{
-				rhSide(kk,1) = ry*u(j, k+1) + (1.- ry)*u(j,k); 
+				rhSide(kk,1) = ry*u(j, k+1) + (1.- ry)*u(j,k);
 				kk++;
 			} else if (k == ny-1)
 			{
@@ -99,7 +91,7 @@ Matrix heatADT::getrhsQ(int j,double rx, Matrix &u)
 	{
 		if (j == 1)
 		{
-			rhSide(kk,1) = rx*u(j+1, k) + (1.- rx)*u(j, k); 
+			rhSide(kk,1) = rx*u(j+1, k) + (1.- rx)*u(j, k);
 			kk++;
 		} else if (j == nx-1)
 		{
@@ -116,7 +108,7 @@ Matrix heatADT::getrhsQ(int j,double rx, Matrix &u)
 }
 
 // get the matrix Q2 as a packed tridiagonal matrix
-Matrix heatADT::StencilQ(double ry) 
+Matrix heatADT::StencilQ(double ry)
 {
 	int i=0;
 	Matrix B(ny, 3);
@@ -128,31 +120,31 @@ Matrix heatADT::StencilQ(double ry)
 	}
 
 // Neumann Boundary
-	B(1,1)= 0.; B(1,2)= 1.+ ry; B(1,3)=-ry; 
+	B(1,1)= 0.; B(1,2)= 1.+ ry; B(1,3)=-ry;
 	B(ny-1, 1) = -ry; B(ny-1, 2) = 1.+ ry; B(ny-1,3)= 0.;
 
 	return B;
 }
 
-void heatADT::tridge( Matrix A, Matrix b, Matrix& x) 
+void heatADT::tridge( Matrix A, Matrix b, Matrix& x)
 {
 // Function to solve b = A*x by Gaussian elimination where
 // the matrix A is a packed tridiagonal matrix
 // Inputs
 //   A      Packed tridiagonal matrix, N by N unpacked
 //   b      Column vector of length N
-// Output 
+// Output
 //   x      Solution of b = A*x; Column vector of length N
 // determ   Determinant of A
 
   // Check that dimensions of a and b are compatible
 	int N = A.nRow();
 	assert( N == b.nRow() && A.nCol() == 3 );
- 
+
   // Unpack diagonals of triangular matrix into vectors
 	Matrix alpha(N,1), beta(N,1), gamma(N,1);
 	int i;
-	for( i=1; i<=(N-1); i++ ) 
+	for( i=1; i<=(N-1); i++ )
 	{
 		alpha(i,1) = A(i+1,1);
 		beta(i,1) = A(i,2);
@@ -161,7 +153,7 @@ void heatADT::tridge( Matrix A, Matrix b, Matrix& x)
 	beta(N-1,1) = A(N-1,2);
 
   // Perform forward elimination
-	for( i=2; i<=N; i++ )	
+	for( i=2; i<=N; i++ )
 	{
 		double coeff = alpha(i-1,1)/beta(i-1,1);
 		beta(i,1) -= coeff*gamma(i-1,1);
@@ -172,34 +164,34 @@ void heatADT::tridge( Matrix A, Matrix b, Matrix& x)
 	x(N-1,1) = b(N-1,1)/beta(N-1,1);
 
 	for( i=N-1-1; i>=1; i--)
-	{ 
+	{
 		x(i,1) = (b(i,1) - gamma(i,1)*x(i+1,1))/beta(i,1);
 	}
 }
 
-// solve the equation 
+// solve the equation
 Matrix heatADT::solver(double kapp,
 						 double dt, Matrix &u)
 {
 	int j=1, k=1;
 	Matrix x(nx,1), y(ny,1);
-	Matrix B(nx, nx), Br(nx,1), Q(ny, ny), Qr(ny,1); 
+	Matrix B(nx, nx), Br(nx,1), Q(ny, ny), Qr(ny,1);
 	Matrix tempUb(nx,ny), tempUq(nx, ny);
 	double rx, ry;
 
 	int nn =1;				// divide timestep into nn substep
 	double ddt =dt/(double)nn;
-	rx = kapp*ddt/(dx*dx); 
+	rx = kapp*ddt/(dx*dx);
 	ry = kapp*ddt/(dy*dy);
 
-	for (int kk=0; kk<nn; kk++) 
-	{ 
+	for (int kk=0; kk<nn; kk++)
+	{
 	 for (k=1; k<ny; k++)
 	 {
 		Br = getrhsB(k, ry, u);
 		B = StencilB(rx);
-		tridge(B, Br, x); 
-	
+		tridge(B, Br, x);
+
 		for (int i = 1; i<nx; i++)
 			tempUb(i,k ) = x(i,1);
 	 }
@@ -209,7 +201,7 @@ Matrix heatADT::solver(double kapp,
 		Qr=getrhsQ(j, rx, tempUb);
 		Q=StencilQ(ry);
 		tridge(Q, Qr, y);
-	
+
 		for (int h=1; h<ny; h++)
 			tempUq(j, h) = y(h,1);
 	 }
@@ -228,10 +220,10 @@ Matrix heatADT::FTCSsolver(double mu, double h, double dt, Matrix& u,
     int i, j;
     double r1=1.0, r2=1.0;
 	Matrix uNew(nx, ny);
-	
+
 	double C1, C2, C3, C4, C, xm, D;
 
-	double epsilon = h/5.; 
+	double epsilon = h/5.;
 	double e = h/100.;
 
 	for(i=2; i<=nx-1; i++)
@@ -245,14 +237,14 @@ Matrix heatADT::FTCSsolver(double mu, double h, double dt, Matrix& u,
 				   pow((u(i,j+1) - u(i,j)),2)/(h*h)) +e);
 		C4=1./(sqrt(pow((u(i+1,j-1) - u(i-1,j-1)),2)/(4.*h*h) +
 				   pow((u(i,j) - u(i,j-1)),2)/(h*h))+e);
-			
+
 		D = 1./PI *epsilon/(epsilon*epsilon +u(i,j)*u(i,j));
 		xm = mu*dt *D/(h*h);
 		C = 1.+xm*(C1+C2+C3+C4);
 
 		uNew(i,j) = C*u(i,j)+xm*(C1*u(i+1,j) + C2*u(i-1,j) +
-									 C3*u(i,j+1) + C4*u(i,j-1)) 
-					   + dt*D*(-r1*pow((U0(i,j)-U1),2) + 
+									 C3*u(i,j+1) + C4*u(i,j-1))
+					   + dt*D*(-r1*pow((U0(i,j)-U1),2) +
 					            r2*pow((U0(i,j)-U2),2));
 
 		}
@@ -267,30 +259,30 @@ Matrix heatADT::solveDiffu(double kapp, double dt, Matrix& u)
     int i, j;
     double h =dx;
 	Matrix uNew(nx, ny);
-	double xm, V=0.;	
+	double xm, V=0.;
 	double C1; //, C2;, C3, C4, C, xm, D;
 
-//	double epsilon = h/5.; 
+//	double epsilon = h/5.;
 //	double e = h/100.;
- 
+
 	for(i=2; i<=nx-1; i++)
 	for(j=2; j<=ny-1; j++)
 	{
 		xm = kapp*dt/(h*h);
-	
+
 		C1 = sqrt(pow((u(i+1,j) - u(i-1,j)),2)/(4.*h*h) +
 			       pow((u(i,j+1) - u(i,j-1)),2)/(4.*h*h));
 		//if (i == nx/2)
-	
+
 	//	cout<<" C1 = "<<C1<<endl;
 
 			V =  C1*20.;//+ pow(C1,2)/9.+ pow(C1,3)/pow(4.,3);
 	//	else V= 1.;
 
-		uNew(i,j) = u(i,j)+xm*(u(i+1,j) + u(i-1,j) + u(i,j+1) + u(i,j-1) 
-							   - 4.*u(i,j)) +  
-					   + dt*(V /*u(i,j)*/); 
-					            
+		uNew(i,j) = u(i,j)+xm*(u(i+1,j) + u(i-1,j) + u(i,j+1) + u(i,j-1)
+							   - 4.*u(i,j)) +
+					   + dt*(V /*u(i,j)*/);
+
 
 		}
 

@@ -1,13 +1,4 @@
 
-/*******************************************************************
- * file:    DMatrix.cpp
- * version: 1.0
- * project: Comp7751 Final Project
- * author:  Song Gao
- * date:    April 25, 2003
- * description: Function implementations in class Matrix
- * 	           
- ******************************************************************/ 
 #include "DMatrix.h"  // Defines the assert function.
 #include <fstream>
 #include <iostream>
@@ -15,8 +6,8 @@
 #include <stdio.h>
 #include <math.h>
 
-// Default Constructor. Creates a 1 by 1 matrix; sets value to zero. 
-Matrix::Matrix () 
+// Default Constructor. Creates a 1 by 1 matrix; sets value to zero.
+Matrix::Matrix ()
 {
 	nRow_ = 256; nCol_ = 256;
 	data_ = new double [256*256];  // Allocate memory
@@ -25,7 +16,7 @@ Matrix::Matrix ()
 
 // Regular Constructor. Creates an nR by nC matrix; sets values to zero.
 // If number of columns is not specified, it is set to 1.
-Matrix::Matrix(int nR, int nC = 1) 
+Matrix::Matrix(int nR, int nC = 1)
 {
 	assert(nR > 0 && nC > 0);    // Check that nC and nR both > 0.
 	nRow_ = nR; nCol_ = nC;
@@ -35,15 +26,15 @@ Matrix::Matrix(int nR, int nC = 1)
 }
 
 // Copy Constructor.
-// Used when a copy of an object is produced 
+// Used when a copy of an object is produced
 // (e.g., passing to a function by value)
-Matrix::Matrix(const Matrix& mat) 
+Matrix::Matrix(const Matrix& mat)
 {
 	this->copy(mat);   // Call private copy function.
 }
 
 // Destructor. Called when a Matrix object goes out of scope.
-Matrix::~Matrix() 
+Matrix::~Matrix()
 {
 	delete [] data_;   // Release allocated memory
 }
@@ -51,7 +42,7 @@ Matrix::~Matrix()
 // Assignment operator function.
 // Overloads the equal sign operator to work with
 // Matrix objects.
-Matrix& Matrix::operator=(const Matrix& mat) 
+Matrix& Matrix::operator=(const Matrix& mat)
 {
 	if( this == &mat ) return *this;  // If two sides equal, do nothing.
 	delete [] data_;                  // Delete data on left hand side
@@ -60,21 +51,21 @@ Matrix& Matrix::operator=(const Matrix& mat)
 }
 
 // Simple "get" functions. Return number of rows or columns.
-int Matrix::nRow() const 
-{ 
-	return nRow_; 
+int Matrix::nRow() const
+{
+	return nRow_;
 }
 
-int Matrix::nCol() const 
-{ 
-	return nCol_; 
+int Matrix::nCol() const
+{
+	return nCol_;
 }
 
 // Parenthesis operator function.
 // Allows access to values of Matrix via (i,j) pair.
-// Example: a(1,1) = 2*b(2,3); 
+// Example: a(1,1) = 2*b(2,3);
 // If column is unspecified, take as 1.
-double& Matrix::operator() (int i, int j = 1) 
+double& Matrix::operator() (int i, int j = 1)
 {
 	assert(i > 0 && i <= nRow_);          // Bounds checking for rows
 	assert(j > 0 && j <= nCol_);          // Bounds checking for columns
@@ -90,14 +81,14 @@ const double& Matrix::operator() (int i, int j = 1) const
 }
 
 // Set function. Sets all elements of a matrix to a given value.
-void Matrix::set(double value) 
+void Matrix::set(double value)
 {
 	int i, iData = nRow_*nCol_;
 	for( i=0; i<iData; i++ )
 		data_[i] = value;
 }
 
-void Matrix::copy(const Matrix& mat) 
+void Matrix::copy(const Matrix& mat)
 {
 	nRow_ = mat.nRow_;
 	nCol_ = mat.nCol_;
@@ -121,7 +112,7 @@ void Matrix::writeFile(char *fname)
 
 	for (i=1; i<nRow_-1; i++)
 	{
-	  for (j=1; j<nCol_-1; j++)	
+	  for (j=1; j<nCol_-1; j++)
 		ofp<<data_[ nCol_*(i-1) + (j-1) ] <<endl;
 	//	ofp<<endl;
 	}

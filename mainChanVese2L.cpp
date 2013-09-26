@@ -1,19 +1,4 @@
-/*******************************************************************
- * file:    mainChanVese2L.cpp
- * version: 1.0
- * project:  Project of IEEE paper 
- * author:  Song Gao
- * Modification date:    Feb. 10, 2004
- * description: The main program
- *				Level set Methods and Image segmentations
- *				
- *				Chan and Vese Method 
- *				TWO (2) Level set Functions are used.
- *
- *		Direct energy computation method and
-		The level set method are implemented in this project.
- *
- *********************************************************************/
+
 
 #include <iostream>
 #include <fstream>
@@ -21,8 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <iomanip> 
-#include <time.h> 
+#include <iomanip>
+#include <time.h>
 #include "Image.h"
 
 #include <windows.h>
@@ -45,7 +30,7 @@ int main()
 
 	double fact = 0.001;
 
-	
+
 	char infile1[50];
 	printf("Input image: ");
 	scanf("%s",infile1);
@@ -54,11 +39,11 @@ int main()
 
 	Image P1, P2;
 
-	P1.readPGMRAW(infile1); // input image  
+	P1.readPGMRAW(infile1); // input image
 
 	P2 = P1 + P1.initializePhiPart_2(80, 80);//
-	
-	P1.updateLevel1(fact); // 1 level set function 
+
+	P1.updateLevel1(fact); // 1 level set function
 
 //	P1.updateLevel(fact); // 2 level set functions
 	return 0;
